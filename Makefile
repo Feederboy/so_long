@@ -32,10 +32,12 @@ SRC=checkers_moves.c \
 OBJ=$(SRC:.c=.o)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(IFLAGS) -c $<
+#	$(CC) $(CFLAGS) $(IFLAGS) -c $<
+	$(CC) $(CFLAGS) -Imlx -c $< -o $(<:.c=.o)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
+#	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -Lmlx -lmlx -framework OpenGL -framework AppKit
 all: $(NAME)
 
 #bonus:
