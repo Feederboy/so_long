@@ -2,10 +2,6 @@ NAME=so_long
 
 CC=clang #-g3#-fsanitize=address
 
-IFLAGS=-Iminilibx-linux
-
-LFLAGS=-Lminilibx-linux -lX11 -lXext -lmlx
-
 CFLAGS=-Wall -Wextra -Werror
 
 RM=rm -f
@@ -32,11 +28,9 @@ SRC=checkers_moves.c \
 OBJ=$(SRC:.c=.o)
 
 %.o: %.c
-#	$(CC) $(CFLAGS) $(IFLAGS) -c $<
 	$(CC) $(CFLAGS) -Imlx -c $< -o $(<:.c=.o)
 
 $(NAME): $(OBJ)
-#	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -Lmlx -lmlx -framework OpenGL -framework AppKit
 all: $(NAME)
 
